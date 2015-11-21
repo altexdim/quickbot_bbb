@@ -423,7 +423,7 @@ class EncoderReader(threading.Thread):
     def run(self):
         self.t0 = time.time()
 
-        while base.RUN_FLAG:
+        while base.run_flag:
             global ENC_IND
             global ENC_TIME
             global ENC_VAL
