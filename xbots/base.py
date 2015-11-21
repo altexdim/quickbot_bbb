@@ -261,7 +261,6 @@ def parse_cmd(self):
                             print str(self.get_pwm())
                         self.robotSocket.sendto(str(self.get_pwm()) + '\n',
                                                 (self.base_ip, self.port))
-
                     elif msg_result.group('SET') and msg_result.group('ARGS'):
                         args = msg_result.group('ARGS')
                         pwm_pattern = r'(?P<LEFT>[-]?\d+),(?P<RIGHT>[-]?\d+)'
@@ -271,9 +270,6 @@ def parse_cmd(self):
                             pwm = [int(pwm_result.group('LEFT')), \
                                     int(pwm_result.group('RIGHT'))]
                             self.set_pwm(pwm)
-
-                    self.robotSocket.sendto(str(self.get_pwm()) + '\n',
-                                            (self.base_ip, self.port))
 
                 elif msg_result.group('CMD') == 'IRVAL':
                     if msg_result.group('QUERY'):
