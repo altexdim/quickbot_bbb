@@ -410,23 +410,23 @@ class QuickBot(base.BaseBot):
         # Call parent method
         super(QuickBot, self).start_threads()
 
-    def read_en_thread_fcn(self, encPin=(config.Ol, config.Or)):
+def read_en_thread_fcn(self, encPin=(config.Ol, config.Or)):
     """EncoderReader thread"""
 
-        # Set properties
-        self.encPin = encPin
+    # Set properties
+    self.encPin = encPin
 
-        self.t0 = time.time()
+    self.t0 = time.time()
 
-        while self.run_flag:
-            global ENC_IND
-            global ENC_TIME
-            global ENC_VAL
+    while self.run_flag:
+        global ENC_IND
+        global ENC_TIME
+        global ENC_VAL
 
-            for side in range(0, 2):
-                ENC_TIME[side][ENC_IND[side]] = time.time() - self.t0
-                ADC_LOCK.acquire()
-                ENC_VAL[side][ENC_IND[side]] = ADC.read_raw(self.encPin[side])
-                time.sleep(ADCTIME)
-                ADC_LOCK.release()
-                ENC_IND[side] = (ENC_IND[side] + 1) % ENC_BUF_SIZE
+        for side in range(0, 2):
+            ENC_TIME[side][ENC_IND[side]] = time.time() - self.t0
+            ADC_LOCK.acquire()
+            ENC_VAL[side][ENC_IND[side]] = ADC.read_raw(self.encPin[side])
+            time.sleep(ADCTIME)
+            ADC_LOCK.release()
+            ENC_IND[side] = (ENC_IND[side] + 1) % ENC_BUF_SIZE
