@@ -402,6 +402,12 @@ class QuickBot(base.BaseBot):
 
         self.encTPrev[side] = t[-1]  # New latest update time
 
+    def start_threads(self):
+        """ Start all threads """
+        self.encoderRead.start()
+
+        # Call parent method
+        super(QuickBot, self).start_threads()
 
 class EncoderReader(threading.Thread):
     """EncoderReader thread"""
