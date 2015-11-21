@@ -95,8 +95,10 @@ class QuickBot(base.BaseBot):
 
     def __init__(self, baseIP, robotIP):
         super(QuickBot, self).__init__(baseIP, robotIP)
+
         # init encoder
         self.encoderRead = threading.Thread(target=read_en_thread_fcn, args=(self, ))
+        self.encoderRead.daemon = True
         
         # Initialize ADC
         ADC.setup()
